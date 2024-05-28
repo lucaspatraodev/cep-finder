@@ -39,9 +39,9 @@ export const SearchCepSection = () => {
       </button>
 
       {cepData && (
-        <div>
+        <section className="w-[25vh] md:w-[300px] flex flex-col items-center">
           <div className="relative overflow-x-auto shadow-lg sm:rounded-lg">
-            <table className="w-[45vh] md:w-[600px] text-sm text-left rtl:text-right text-[#FFD166] p-4">
+            <table className="w-[25vh] md:w-[300px] text-sm text-left rtl:text-right text-[#FFD166] p-4">
               <thead className="text-xs text-[#FFD166] uppercase bg-black">
                 <tr>
                   <th scope="col" className="px-6 py-3">
@@ -76,7 +76,7 @@ export const SearchCepSection = () => {
               Não é nenhum destes resultados? Faça uma nova pesquisa!
             </a>
           </div>
-        </div>
+        </section>
       )}
     </section>
   );

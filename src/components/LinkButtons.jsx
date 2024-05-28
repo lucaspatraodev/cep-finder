@@ -1,6 +1,6 @@
 export const LinkButtons = () => {
   return (
-    <div className="flex justify-center pb-12">
+    <div className="flex justify-center items-end pb-12">
       <div className="flex gap-8 ">
         <button className="group w-32 relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-[#0A78B5] px-6 font-bold text-neutral-200 duration-500">
           <a

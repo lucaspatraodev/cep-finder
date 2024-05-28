@@ -13,12 +13,14 @@ export function App() {
     <BrowserRouter>
       <Header />
       <main className="flex flex-col flex-grow items-center justify-start gap-4 h-[88vh] bg-[#262526] p-4">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cepsearch" element={<SearchCepSection />} />
-          <Route path="/addresssearch" element={<SearchAddressSection />} />
-        </Routes>
-        <LinkButtons />
+        <div className="flex flex-col items-center justify-between gap-4 h-[88vh] bg-[#262526] p-4">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cepsearch" element={<SearchCepSection />} />
+            <Route path="/addresssearch" element={<SearchAddressSection />} />
+          </Routes>
+          <LinkButtons />
+        </div>
       </main>
     </BrowserRouter>
   );

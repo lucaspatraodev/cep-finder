@@ -2,7 +2,7 @@ export const Home = () => {
   function handleButtonClick() {}
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
       <a
         href="/cepsearch"
         className="text-center w-72 bg-[#FFD166] text-[#040D12] font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:bg-[#f1c96a] hover:shadow-lg hover:-translate-y-[2px]"
@@ -18,6 +18,6 @@ export const Home = () => {
       >
         Sei o CEP mas não sei o endereço
       </a>
-    </>
+    </div>
   );
 };

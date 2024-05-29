@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import brazilCities from "../data/estados-cidades.json";
 
 export const SearchAddressSection = () => {
   const [uf, setUf] = useState(null);
   const [city, setCity] = useState(null);
   const [addressSearch, setAddressSearch] = useState(null);
-  const [addressData, setAddressData] = useState(null);
+  const [addressData, setAddressData] = useState(false);
+
+  useEffect(() => {
+    console.log(addressData);
+  }, [addressData]);
 
   const getCitiesByState = (uf) => {
     const state = brazilCities.estados.find((state) => state.sigla === uf);
@@ -29,19 +34,23 @@ export const SearchAddressSection = () => {
         throw new Error("Erro ao buscar o CEP");
       }
       const data = await response.json();
-      console.log(data);
-      setAddressData(data);
+      data[0].logradouro == "" ? setAddressData(null) : setAddressData(data);
+
+      console.log(addressData);
     } catch (error) {
       console.error("Erro ao buscar o CEP:", error);
     }
   };
 
   return (
-    <section className="w-8/12 flex flex-col items-center">
+    <section className="w-full flex flex-col items-center">
       <select
         className="select"
         onChange={(event) => setUf(event.target.value)}
       >
+        <option className="option-custom" value="">
+          Selecione uma UF
+        </option>
         <option className="option-custom" value="AC">
           Acre
         </option>
@@ -126,7 +135,7 @@ export const SearchAddressSection = () => {
       </select>
 
       {uf && (
-        <section className="flex flex-col gap-4">
+        <section className="flex flex-col w-full items-center gap-4">
           <select
             className="select"
             onChange={(event) => setCity(event.target.value)}
@@ -160,10 +169,15 @@ export const SearchAddressSection = () => {
         </section>
       )}
 
-      {addressData && (
+      {addressData == true && (
         <div className="mt-6 w-[25vh] md:w-[300px] flex flex-col items-center">
           <div className="relative overflow-x-auto shadow-lg sm:rounded-lg">
-            <table className="w-[25vh] md:w-[300px] text-sm text-left rtl:text-right text-[#FFD166] p-4">
+            <motion.table
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="w-[25vh] md:w-[300px] text-sm text-left rtl:text-right text-[#FFD166] p-4"
+            >
               <thead className="text-xs text-[#FFD166] uppercase bg-black">
                 <tr>
                   <th scope="col" className="px-6 py-3">
@@ -178,39 +192,45 @@ export const SearchAddressSection = () => {
                 </tr>
               </thead>
               <tbody>
-                {addressData.map((place) => {
-                  return (
-                    <tr
-                      key={place.cep}
-                      className="text-[11px] font-bold md:text-xs border-b bg-[#323232] border-gray-700 hover:bg-gray-600"
-                    >
-                      <th
-                        scope="row"
-                        className="text-[11px] md:text-xs px-6 py-4 text-[#FFD166] whitespace-nowrap"
+                {Array.isArray(addressData) &&
+                  addressData.map((place) =>
+                    place.logradouro != 0 ? (
+                      <tr
+                        key={place.cep}
+                        className="text-[11px] font-bold md:text-xs border-b bg-[#323232] border-gray-700 hover:bg-gray-600"
                       >
-                        {place.logradouro === ""
-                          ? "Não possui logradouro"
-                          : place.logradouro}
-                      </th>
-                      <td className="text-[11px] text-[#FFD166] md:text-xs px-6 py-4">
-                        {place.bairro === ""
-                          ? "Não possui bairro"
-                          : place.bairro}{" "}
-                      </td>
-                      <td className="text-[11px] text-[#FFD166] md:text-xs px-6 py-4">
-                        {place.cep}
-                      </td>
-                    </tr>
-                  );
-                })}
+                        <th
+                          scope="row"
+                          className="text-[11px] md:text-xs px-6 py-4 text-[#FFD166] whitespace-nowrap"
+                        >
+                          {place.logradouro}
+                        </th>
+                        <td className="text-[11px] text-[#FFD166] md:text-xs px-6 py-4">
+                          {place.bairro === ""
+                            ? "Não possui bairro"
+                            : place.bairro}
+                        </td>
+                        <td className="text-[11px] text-[#FFD166] md:text-xs px-6 py-4">
+                          {place.cep}
+                        </td>
+                      </tr>
+                    ) : null
+                  )}
               </tbody>
-            </table>
+            </motion.table>
           </div>
-          <div className="flex justify-start mb-16">
-            <a href="/addresssearch" className="text-[#FFD166] underline my-8">
-              Não é nenhum destes resultados? Faça uma nova pesquisa!
-            </a>
-          </div>
+        </div>
+      )}
+
+      {addressData == null && (
+        <div className="flex flex-col text-center justify-start mb-16">
+          <p className="text-[#FFD166] text-center font-medium my-8">
+            Sua pesquisa não encontrou resultados, certifique-se de informar os
+            dados corretos!
+          </p>
+          <a href="/cepsearch" className="text-[#FFD166] underline my-8">
+            Faça uma nova pesquisa!
+          </a>
         </div>
       )}
     </section>

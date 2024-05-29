@@ -1,8 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+
+import { IMaskInput } from "react-imask";
 
 export const SearchCepSection = () => {
   const [searchedCep, setSearchedCep] = useState(null);
   const [cepData, setCepData] = useState("");
+
+  useEffect(() => {
+    console.log(cepData);
+    console.log(!cepData.cep);
+  }, [cepData]);
 
   const fetchCepData = async (cep) => {
     try {
@@ -19,13 +27,16 @@ export const SearchCepSection = () => {
   };
 
   return (
-    <section className="flex flex-col items-center gap-4">
+    <section className="flex flex-col w-full items-center gap-6">
       <input
-        type="text"
+        type="number"
         placeholder="Digite um CEP..."
+        maxLength="8"
         className="input"
+        required
         onChange={(event) => {
-          setSearchedCep(event.target.value);
+          let cep = event.target.value.replace(/[^\d]/g, "");
+          setSearchedCep(cep);
         }}
       />
 
@@ -38,10 +49,15 @@ export const SearchCepSection = () => {
         Pesquisar
       </button>
 
-      {cepData && (
+      {cepData.cep ? (
         <section className="w-[25vh] md:w-[300px] flex flex-col items-center">
           <div className="relative overflow-x-auto shadow-lg sm:rounded-lg">
-            <table className="w-[25vh] md:w-[300px] text-sm text-left rtl:text-right text-[#FFD166] p-4">
+            <motion.table
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="w-[25vh] md:w-[300px] text-sm text-left rtl:text-right text-[#FFD166] p-4"
+            >
               <thead className="text-xs text-[#FFD166] uppercase bg-black">
                 <tr>
                   <th scope="col" className="px-6 py-3">
@@ -54,11 +70,11 @@ export const SearchCepSection = () => {
               </thead>
               <tbody>
                 <tr
-                  key={cepData.logradouro}
+                  key={cepData.cep}
                   className="text-[11px] md:text-xs border-b bg-[#323232] border-gray-700 hover:bg-gray-600"
                 >
                   <th
-                    key={cepData.bairro}
+                    key={cepData.logradouro}
                     scope="row"
                     className="text-[11px] md:text-xs px-6 py-4 font-medium text-[#FFD166] whitespace-nowrap"
                   >
@@ -69,7 +85,7 @@ export const SearchCepSection = () => {
                   </td>
                 </tr>
               </tbody>
-            </table>
+            </motion.table>
           </div>
           <div className="flex justify-start mb-16">
             <a href="/cepsearch" className="text-[#FFD166] underline my-8">
@@ -77,6 +93,20 @@ export const SearchCepSection = () => {
             </a>
           </div>
         </section>
+      ) : (
+        <div className="flex justify-center mb-16">
+          {cepData.erro && (
+            <div className="flex flex-col gap-4 text-center w-3/6">
+              <p className=" text-[#FFD166] text-center font-medium my-8">
+                Sua pesquisa não encontrou resultados, certifique-se de informar
+                os dados corretos!
+              </p>
+              <a href="/cepsearch" className="text-[#FFD166] underline my-8">
+                Faça uma nova pesquisa!
+              </a>
+            </div>
+          )}
+        </div>
       )}
     </section>
   );

@@ -2,13 +2,13 @@ export const LinkButtons = () => {
   return (
     <div className="flex justify-center items-end pb-12">
       <div className="flex gap-8 ">
-        <button className="group w-32 relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-[#0A78B5] px-6 font-bold text-neutral-200 duration-500">
-          <a
-            href="https://www.linkedin.com/in/lucas-patrao/"
-            className="translate-x-0 opacity-100 transition group-hover:-translate-x-[150%] group-hover:opacity-0"
-          >
+        <a
+          href="https://www.linkedin.com/in/lucas-patrao/"
+          className="group w-32 relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-[#0A78B5] px-6 font-bold text-neutral-200 duration-500"
+        >
+          <div className="translate-x-0 opacity-100 transition group-hover:-translate-x-[150%] group-hover:opacity-0">
             Linkedin
-          </a>
+          </div>
           <div className="absolute translate-x-[150%] opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100">
             <svg
               width="15"
@@ -24,14 +24,14 @@ export const LinkButtons = () => {
               ></path>
             </svg>
           </div>
-        </button>
-        <button className="group w-32 relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-[#9000f7db] px-6 font-bold text-white  duration-500">
-          <a
-            href="https://www.linkedin.com/in/lucas-patrao/"
-            className="translate-x-0 opacity-100 transition group-hover:-translate-x-[150%] group-hover:opacity-0"
-          >
+        </a>
+        <a
+          href="https://github.com/lucaspatraodev"
+          className="group w-32 relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-[#9000f7db] px-6 font-bold text-white  duration-500"
+        >
+          <div className="translate-x-0 opacity-100 transition group-hover:-translate-x-[150%] group-hover:opacity-0">
             Github
-          </a>
+          </div>
           <div className="absolute translate-x-[150%] opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100">
             <svg
               width="15"
@@ -47,7 +47,7 @@ export const LinkButtons = () => {
               ></path>
             </svg>
           </div>
-        </button>
+        </a>
       </div>
     </div>
   );

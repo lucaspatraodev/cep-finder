@@ -12,8 +12,8 @@ export function App() {
   return (
     <BrowserRouter>
       <Header />
-      <main className="flex flex-col flex-grow items-center justify-start gap-4 h-[88vh] bg-[#262526] p-4">
-        <div className="flex flex-col items-center justify-between gap-4 h-[88vh] bg-[#262526] p-4">
+      <main className="flex flex-col items-center mx-auto justify-start gap-4 w-11/12 h-[88vh] bg-[#262526] p-8">
+        <div className="flex flex-col w-full items-center justify-between gap-4 h-[88vh] bg-[#262526] p-4">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cepsearch" element={<SearchCepSection />} />

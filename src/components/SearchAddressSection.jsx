@@ -156,7 +156,7 @@ export const SearchAddressSection = () => {
             className="input"
             onChange={(event) => {
               const inputValue = event.target.value;
-              const alphaValue = inputValue.replace(/[^a-zA-Z]/g, "");
+              const alphaValue = inputValue.replace(/[^a-zA-Z\s]/g, "");
               event.target.value = alphaValue;
               setAddressSearch(alphaValue);
             }}

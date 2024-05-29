@@ -6,10 +6,13 @@ export const SearchCepSection = () => {
   const [cepData, setCepData] = useState("");
 
   const fetchCepData = async (cep) => {
-    if (searchedCep.lenght < 8) {
+    console.log(searchedCep.length);
+    console.log(searchedCep.length < 8);
+    if (searchedCep.length < 8) {
       alert("Você digitou um Cep com menos de 8 digitos!");
       return;
     }
+
     try {
       const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
       if (!response.ok) {
@@ -31,7 +34,7 @@ export const SearchCepSection = () => {
         className="input"
         maxLength="8"
         required
-        onInput={(event) => {
+        onChange={(event) => {
           const inputValue = event.target.value;
           const numericValue = inputValue.replace(/\D/g, "");
           event.target.value = numericValue;

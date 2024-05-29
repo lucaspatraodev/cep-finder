@@ -30,13 +30,15 @@ export const SearchCepSection = () => {
         type="text"
         placeholder="Digite um CEP..."
         className="input"
-        minLength="8"
         maxLength="8"
         required
         onInput={(event) => {
           const inputValue = event.target.value;
           const numericValue = inputValue.replace(/\D/g, "");
           event.target.value = numericValue;
+          if (numericValue.lenght > 8) {
+            alert("Você digitou um Cep com menos de 8 digitos!");
+          }
           setSearchedCep(numericValue);
         }}
       />

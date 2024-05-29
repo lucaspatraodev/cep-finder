@@ -1,6 +1,6 @@
 export const LinkButtons = () => {
   return (
-    <div className="flex justify-center items-end pb-12">
+    <div className="flex justify-center items-end pb-24">
       <div className="flex gap-8 ">
         <a
           href="https://www.linkedin.com/in/lucas-patrao/"

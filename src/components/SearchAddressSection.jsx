@@ -169,7 +169,7 @@ export const SearchAddressSection = () => {
         </section>
       )}
 
-      {addressData == true && (
+      {addressData && (
         <div className="mt-6 w-[25vh] md:w-[300px] flex flex-col items-center">
           <div className="relative overflow-x-auto shadow-lg sm:rounded-lg">
             <motion.table

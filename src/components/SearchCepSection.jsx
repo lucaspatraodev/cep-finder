@@ -30,6 +30,7 @@ export const SearchCepSection = () => {
         type="text"
         placeholder="Digite um CEP..."
         className="input"
+        minLength="8"
         maxLength="8"
         required
         onInput={(event) => {

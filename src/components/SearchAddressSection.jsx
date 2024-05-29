@@ -151,13 +151,17 @@ export const SearchAddressSection = () => {
           </select>
 
           <input
-            onChange={(event) => {
-              setAddressSearch(event.target.value);
-            }}
             type="text"
             placeholder="Digite um endereço"
             className="input"
+            onChange={(event) => {
+              const inputValue = event.target.value;
+              const alphaValue = inputValue.replace(/[^a-zA-Z]/g, "");
+              event.target.value = alphaValue;
+              setAddressSearch(alphaValue);
+            }}
           />
+
           <button
             onClick={() => {
               fetchAddressData(uf, city, addressSearch);

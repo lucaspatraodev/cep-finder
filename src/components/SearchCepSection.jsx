@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-import { IMaskInput } from "react-imask";
-
 export const SearchCepSection = () => {
   const [searchedCep, setSearchedCep] = useState(null);
   const [cepData, setCepData] = useState("");
@@ -29,14 +27,16 @@ export const SearchCepSection = () => {
   return (
     <section className="flex flex-col w-full items-center gap-6">
       <input
-        type="number"
+        type="text"
         placeholder="Digite um CEP..."
-        maxLength="8"
         className="input"
+        maxLength="8"
         required
-        onChange={(event) => {
-          let cep = event.target.value.replace(/[^\d]/g, "");
-          setSearchedCep(cep);
+        onInput={(event) => {
+          const inputValue = event.target.value;
+          const numericValue = inputValue.replace(/\D/g, "");
+          event.target.value = numericValue;
+          setSearchedCep(numericValue);
         }}
       />
 

@@ -5,11 +5,6 @@ export const SearchCepSection = () => {
   const [searchedCep, setSearchedCep] = useState(null);
   const [cepData, setCepData] = useState("");
 
-  useEffect(() => {
-    console.log(cepData);
-    console.log(!cepData.cep);
-  }, [cepData]);
-
   const fetchCepData = async (cep) => {
     try {
       const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
@@ -36,9 +31,10 @@ export const SearchCepSection = () => {
           const inputValue = event.target.value;
           const numericValue = inputValue.replace(/\D/g, "");
           event.target.value = numericValue;
-          if (numericValue.lenght > 8) {
+          if (numericValue.lenght < 8) {
             alert("Você digitou um Cep com menos de 8 digitos!");
           }
+          console.log(numericValue);
           setSearchedCep(numericValue);
         }}
       />

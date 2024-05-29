@@ -6,7 +6,7 @@ export const SearchCepSection = () => {
   const [cepData, setCepData] = useState("");
 
   const fetchCepData = async (cep) => {
-    if (cep.lenght < 8) {
+    if (searchedCep.lenght < 8) {
       alert("Você digitou um Cep com menos de 8 digitos!");
       return;
     }
